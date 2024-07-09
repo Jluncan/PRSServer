@@ -19,7 +19,7 @@ namespace PRSServer.Models {
         public string Status { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal(11, 2)")]
-        public decimal Total {  get; set; }
+        public decimal Total {  get;  set; }
 
         public int UserId { get; set; }
         public virtual User? User { get; set; }

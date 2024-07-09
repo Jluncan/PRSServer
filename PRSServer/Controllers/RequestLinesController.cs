@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,29 @@ namespace PRSServer.Controllers
         {
             _context = context;
         }
+        private async Task<IActionResult> RecalculateRequestTotal(int requestId) {
+            var request = await _context.Requests.FindAsync(requestId);
+            if (request == null) {
+                return NotFound();
+            }
 
-        // GET: api/RequestLines
-        [HttpGet]
+            request.Total = (from rl in _context.RequestLines
+                             join p in _context.Products
+                             on rl.ProductId equals p.Id
+                             where rl.RequestId == requestId
+                             select new {
+                                 LineTotal = rl.Quantity
+                                 * p.Price
+                             }).Sum(x => x.LineTotal);
+            await _context.SaveChangesAsync();
+            return Ok();
+        
+            
+         
+        }
+
+            // GET: api/RequestLines
+            [HttpGet]
         public async Task<ActionResult<IEnumerable<RequestLine>>> GetRequestLines()
         {
             return await _context.RequestLines.ToListAsync();
@@ -69,18 +90,25 @@ namespace PRSServer.Controllers
                 }
             }
 
+            await RecalculateRequestTotal(id);
             return NoContent();
         }
 
         // POST: api/RequestLines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RequestLine>> PostRequestLine(RequestLine requestLine)
-        {
+        public async Task<ActionResult<RequestLine>> PostRequestLine(RequestLine requestLine) {
             _context.RequestLines.Add(requestLine);
+
             await _context.SaveChangesAsync();
+            await RecalculateRequestTotal(requestLine.Id);
+
+
 
             return CreatedAtAction("GetRequestLine", new { id = requestLine.Id }, requestLine);
+            
+
+
         }
 
         // DELETE: api/RequestLines/5
@@ -96,7 +124,10 @@ namespace PRSServer.Controllers
             _context.RequestLines.Remove(requestLine);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+
+            await RecalculateRequestTotal(id);
+                                    
+                return NoContent();
         }
 
         private bool RequestLineExists(int id)
