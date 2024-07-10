@@ -19,7 +19,7 @@ namespace PRSServer.Models {
 
         public string unit { get; set; } = string.Empty;
         [StringLength(255)]
-        public string PhotoPath { get; set; } = string.Empty;
+        public string? PhotoPath { get; set; } = string.Empty;
 
         public int VendorId { get; set; }
         public virtual Vendor? Vendor { get; set; }

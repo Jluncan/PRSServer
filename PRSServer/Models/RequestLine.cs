@@ -12,9 +12,8 @@ namespace PRSServer.Models {
         public int ProductId { get; set; }
         public virtual Product? Product { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Quantity must be higher than 0 or 1")]
+        
         public int Quantity { get; set; } 
-        public string Status { get; internal set; }
-        public int TotalAmount { get; internal set; }
+       
     }
 }

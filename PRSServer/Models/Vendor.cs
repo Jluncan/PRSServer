@@ -18,7 +18,7 @@ namespace PRSServer.Models {
         [StringLength(2)]
         public string State { get; set; }= string.Empty;
         [StringLength(5)]
-        public string ZipCode { get; set; } = string.Empty;
+        public string Zip { get; set; } = string.Empty;
 
         [StringLength(12)]
 
