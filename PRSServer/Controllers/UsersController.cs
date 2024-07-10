@@ -21,10 +21,10 @@ namespace PRSServer.Controllers
             _context = context;
         }
         // GET: api/Users/email/password
-        [HttpGet("{email} {password}")]
-        public async Task<ActionResult<User>> Login(string email, string password) {
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<User>> Login(string username, string password) {
             // Find User/ based on email and password
-            var User = await _context.Users.FirstOrDefaultAsync(c => c.Email == email && c.Password == password);
+            var User = await _context.Users.FirstOrDefaultAsync(c => c.UserName == username && c.Password == password);
 
             if (User == null) {
                 // Return NotFound or Unauthorized response if User not found

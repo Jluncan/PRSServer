@@ -14,12 +14,12 @@ namespace PRSServer.Models {
         public string RejectionReason {  get; set; } = string.Empty;
 
         [StringLength(20)]
-        public string DeliveryMode {  get; set; } = string.Empty;
+        public string DeliveryMode {  get; set; } = "Pickup";
         [StringLength(10)]
-        public string Status { get; set; } = string.Empty;
+        public string Status { get; set; } = "New";
 
         [Column(TypeName = "decimal(11, 2)")]
-        public decimal Total {  get;  set; }
+        public decimal Total { get; set; } = 0m;
 
         public int UserId { get; set; }
         public virtual User? User { get; set; }
