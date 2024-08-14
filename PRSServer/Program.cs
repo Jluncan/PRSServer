@@ -17,6 +17,8 @@ namespace PRSServer {
 
             var app = builder.Build();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
@@ -26,7 +28,7 @@ namespace PRSServer {
 
             app.MapControllers();
 
-            app.Run();
+            app.Run("http://localhost:5000");
         }
     }
 }
