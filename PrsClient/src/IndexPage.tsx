@@ -1,17 +1,10 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Header from "./Header";
 import Navitem from "./Navitem";
-import { BrowserRouter, Router } from "react-router-dom";
 
-// import './header'
-
-function App() {
+  // import React from 'react'
+  function IndexPage() {
   return (
-    
-    <BrowserRouter>
     <div>
-
   <meta charSet="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
@@ -26,13 +19,8 @@ function App() {
     </section>
   </main>
   <div className="container-fluid py-4 px-5 d-flex justify-content-center" />
-    </div>
-
-
-    </BrowserRouter>
-    
-  );
-
+  
+</div>
+  )
 }
-export default App
-
+export default IndexPage
