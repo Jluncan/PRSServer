@@ -1,5 +1,5 @@
 
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Vendor } from "./Vendor";
 import { useForm } from 'react-hook-form';
 import { vendorAPI } from "./VendorApi";
@@ -55,6 +55,14 @@ function VendorForm() {
         autoFocus
         />
         <div className="invalid-feedback">{errors?.address?.message}</div>
+      </div>
+      <div className="d-flex gap-2">
+        <button type="submit" className="btn btn-outline-primary">
+          Save
+        </button>
+        <Link className="btn btn-outline-secondary" to="/actors">
+          Cancel
+        </Link>
       </div>
       
 
