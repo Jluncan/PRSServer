@@ -17,7 +17,7 @@ function Navitem() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <Link to={"/VendorsPage"} className="nav-link">
+          <Link to={"/vendors"} className="nav-link">
             Vendors
           </Link>
         </li>
