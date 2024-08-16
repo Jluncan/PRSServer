@@ -2,6 +2,7 @@
 import { BrowserRouter, Link } from "react-router-dom";
 import Header from "../Header";
 import Navitem from "../Navitem";
+import VendorList from "./VendorList";
 
 function VendorsPage() {
   return (
@@ -10,7 +11,7 @@ function VendorsPage() {
         <section className="container-fluid py-41 px-5">
           <section className="d-flex justify-content-between">
           <h3> Vendor </h3>
-            <Link to="" className="btn btn-outline-primary">
+            <Link to="/vendors/create" className="btn btn-outline-primary">
               <svg className="bi" width={32} height={32} fill="currentColor">
                 <use xlinkHref="./node_modules/bootstrap-icons/bootstrap-icons.svg#plus" />
               </svg>
@@ -18,7 +19,8 @@ function VendorsPage() {
             </Link>
           </section>
           <hr />
-          <section>
+          <VendorList/>
+          {/* <section>
             <section className="d-flex flex-wrap gap-5">
               <div className="card mb-3" style={{ width: "18rem" }}>
                 <div className="card-body">
@@ -48,7 +50,7 @@ function VendorsPage() {
                 </div>
               </div>
             </section>
-          </section>
+          </section> */}
         </section>
       </main>
     </div>

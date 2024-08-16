@@ -3,25 +3,30 @@ import { Vendor } from "./Vendor";
 import { vendorAPI } from "./VendorApi";
 
 function VendorList() {
- 
-    const [vendors, setVendors] = useState<Vendor[]>([]);
-    const [busy, setBusy] = useState(false);
+  const [vendors, setVendors] = useState<Vendor[]>([]);
+  const [busy, setBusy] = useState(false);
 
-    async function getVendors() {
-      setBusy(true);
-      let data = await vendorAPI.list();
-      setVendors(data);
-      setBusy(false);
-    }
+  async function getVendors() {
+    setBusy(true);
+    let data = await vendorAPI.list();
+    setVendors(data);
+    setBusy(false);
+  }
 
-    useEffect(() => {
-      getVendors();
-    }, []);
-    
-    return (
-      <div className="container-fluid list bg-body-tertiary p-3">
-      {/* <div className="row"> */}
-      <div className="card col-3 m-4">
+  useEffect(() => {
+    getVendors();
+  }, []);
+
+  return (
+    <div className="d-flex flex-wrap gap-4 list">
+       {vendors.map((vendor) => (
+        <div>
+          {vendor.name}
+        </div>
+        
+        ))}
+      
+      {/* <div className="card col-3 m-4">
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <div>
@@ -30,11 +35,11 @@ function VendorList() {
             </div>
           </div>
         </div>
-      </div>
-      {/* </div> */}
+      </div> */}
+
+
+      
     </div>
   );
-  
-  
 }
-  export default VendorList;
+export default VendorList;

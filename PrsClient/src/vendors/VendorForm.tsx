@@ -60,7 +60,7 @@ function VendorForm() {
         <button type="submit" className="btn btn-outline-primary">
           Save
         </button>
-        <Link className="btn btn-outline-secondary" to="/actors">
+        <Link className="btn btn-outline-secondary" to="/vendors">
           Cancel
         </Link>
       </div>
