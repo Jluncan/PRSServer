@@ -57,7 +57,7 @@ function VendorForm() {
         <div className="invalid-feedback">{errors?.address?.message}</div>
       </div>
       <div className="d-flex gap-2">
-        <button type="submit" className="btn btn-outline-primary">
+        <button  type="submit" className="btn btn-outline-primary">
           Save
         </button>
         <Link className="btn btn-outline-secondary" to="/vendors">

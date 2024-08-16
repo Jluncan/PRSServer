@@ -19,13 +19,33 @@ function VendorList() {
 
   return (
     <div className="d-flex flex-wrap gap-4 list">
-       {vendors.map((vendor) => (
-        <div>
-          {vendor.name}
+      {vendors.map((vendor) => (
+        <div className="card w-25">
+          <div className="progress">
+            <div
+              className="progress-bar bg-primary"
+              role="progressbar"
+              style={{ width: "60%" }}
+              aria-valuenow={60}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            />
+          </div>
+          <address className="py-4 px-4">
+            <div className="d-flex justify-content-between align-items-center">
+              <span>
+                <strong>{vendor.name}</strong> <span className="badge text-bg-secondary">{vendor.code}</span>
+              </span>
+            </div>
+            <br />
+            {vendor.address} <br />
+            {vendor.city} <br />
+            {vendor.phone} <br />
+            {vendor.email}
+          </address>
         </div>
-        
-        ))}
-      
+      ))}
+
       {/* <div className="card col-3 m-4">
         <div className="card-body">
           <div className="d-flex justify-content-between">
@@ -36,9 +56,6 @@ function VendorList() {
           </div>
         </div>
       </div> */}
-
-
-      
     </div>
   );
 }
