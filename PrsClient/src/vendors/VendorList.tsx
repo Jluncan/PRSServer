@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import { Vendor } from "./Vendor";
 import { vendorAPI } from "./VendorApi";
+// import { NavLink } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import { Dropdown } from "react-bootstrap";
+import VendorCard from "./VendorCard";
+import toast from "react-hot-toast";
 
 function VendorList() {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [busy, setBusy] = useState(false);
 
-  async function getVendors() {
+  async function loadVendors() {
     setBusy(true);
     let data = await vendorAPI.list();
     setVendors(data);
@@ -14,49 +19,37 @@ function VendorList() {
   }
 
   useEffect(() => {
-    getVendors();
+    loadVendors();
   }, []);
 
-  return (
-    <div className="d-flex flex-wrap gap-4 list">
-      {vendors.map((vendor) => (
-        <div className="card w-25">
-          <div className="progress">
-            <div
-              className="progress-bar bg-primary"
-              role="progressbar"
-              style={{ width: "60%" }}
-              aria-valuenow={60}
-              aria-valuemin={0}
-              aria-valuemax={100}
-            />
-          </div>
-          <address className="py-4 px-4">
-            <div className="d-flex justify-content-between align-items-center">
-              <span>
-                <strong>{vendor.name}</strong> <span className="badge text-bg-secondary">{vendor.code}</span>
-              </span>
-            </div>
-            <br />
-            {vendor.address} <br />
-            {vendor.city} <br />
-            {vendor.phone} <br />
-            {vendor.email}
-          </address>
-        </div>
-      ))}
+  async function remove(vendor: Vendor) {
+    if (confirm("Are you sure you want to delete this Vendor?")) {
+      if (vendor.id) {
+        await vendorAPI.delete(vendor.id);
+        let updatedVendors = vendors.filter((v) => v.id !== vendor.id);
+        setVendors(updatedVendors);
+        toast.success("Successfully deleted.");
+      }
+    }
+  }
 
-      {/* <div className="card col-3 m-4">
-        <div className="card-body">
-          <div className="d-flex justify-content-between">
-            <div>
-              <h5 className="card-title">AeroTech Solutions</h5>
-              <h6 className="card-subtitle mb-2 badge bg-secondary">AERO-TS</h6>
-            </div>
+  return (
+    <>
+      {busy && (
+        <section className="d-flex justify-content-center align-items-center align-content-center vh-100">
+          <div className=" spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
-        </div>
-      </div> */}
-    </div>
+        </section>
+      )}
+      <div className="d-flex flex-wrap gap-4 list">
+        {vendors.map((vendor) => (
+          <VendorCard key={vendor.id} vendor={vendor} onRemove={remove} />
+        ))}
+      </div>
+      ;
+    </>
   );
 }
+
 export default VendorList;

@@ -9,6 +9,11 @@ import VendorsCreate from "./vendors/VendorsCreate";
 import VendorEditPage from "./vendors/VendorEditPage";
 import VendorDetailPage from "./vendors/VendorDetailPage";
 import { Toaster } from "react-hot-toast";
+import { User } from "./users/User";
+import UserPage from "./users/UserPage";
+import UserEditPage from "./users/UserEditPage";
+import UserCreate from "./users/UserCreate";
+import { UserContext } from "./users/UserContext";
 
 // import './header'
 
@@ -20,11 +25,11 @@ function getPersistedUser() {
 }
 
 function App() {
-  const [user, SetUser] = useState<User | undefined>(getPersistedUser());
+  const [user, setUser] = useState<User | undefined>(getPersistedUser());
 
   return (
     <Router>
-      {/* <UserContext.Provider value={{ user, SetUser }}> */}
+      <UserContext.Provider value={{ user, setUser }}>
       <Header user={user} />
       <main className="d-flex">
         <Toaster
@@ -46,14 +51,16 @@ function App() {
             <Route path="/" />
             {/* <Route path="/signin" element={<SignInPage />} /> */}
             <Route path="vendors" element={<VendorsPage />} />
-            <Route path="/vendors/create" element={<VendorsCreate />} />
-            <Route path=" /vendors/edit/:id" element={<VendorEditPage />} />
-            <Route path="/vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
-            {/* STILL NEED TO ADD ROUTING FOR USERS/ALL OTHERS */}
+            <Route path="vendors/create" element={<VendorsCreate />} />
+            <Route path="vendor/edit/:id" element={<VendorEditPage />} />
+            <Route path="vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
+            <Route path="/users" element={<UserPage />} />
+            <Route path="users/create" element={<UserCreate />} />
+            {/* <Route path="users/edit/:id" element={<UserEditPage />} /> */}
           </Routes>
         </section>
       </main>
-      {/* </UserContext.Provider> */}
+      </UserContext.Provider>
     </Router>
   );
 }

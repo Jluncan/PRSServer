@@ -4,12 +4,12 @@ import { Link, NavLink } from "react-router-dom";
 
 function Navitem() {
   return (
-    <nav>
-      <ul className="nav flex-column p-4">
-        <li className="nav-item">
-          <Link to={"./Requests"} className="nav-link">
+    <nav style={{ width: "20rem" }}>
+      <ul className="nav flex-column nav-pills p-4 bg-body-secondary vh-100">
+        <li className="nav-item ">
+          <NavLink to={"/requests"} className="nav-link">
             Requests
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
           <NavLink to="" className="nav-link">
@@ -17,12 +17,12 @@ function Navitem() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <Link to={"/vendors"} className="nav-link">
+          <NavLink to={"/vendors"} className="nav-link">
             Vendors
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="" className="nav-link">
+          <NavLink to="/users" className="nav-link">
             Users
           </NavLink>
         </li>
