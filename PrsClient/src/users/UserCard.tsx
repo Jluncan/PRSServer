@@ -39,7 +39,7 @@ function UserCard({ user, onRemove }: UserCardProps) {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <li>
-                <Link to={`/vendor/edit/${user.id}`} className="dropdown-item">
+                <Link to={`/users/edit/${user.id}`} className="dropdown-item">
                   Edit
                 </Link>
               </li>

@@ -10,7 +10,7 @@ function UserPage() {
         <section className="container-fluid py-41 px-5">
           <section className="d-flex justify-content-between">
             <h3> Users </h3>
-            <Link to="/user/create" className="btn btn-outline-primary">
+            <Link to="/users/create" className="btn btn-outline-primary">
               <svg className="bi" width={32} height={32} fill="currentColor">
                 <use xlinkHref="./node_modules/bootstrap-icons/bootstrap-icons.svg#plus" />
               </svg>

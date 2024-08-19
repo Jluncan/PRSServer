@@ -30,36 +30,36 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
-      <Header user={user} />
-      <main className="d-flex">
-        <Toaster
-          toastOptions={{
-            success: {
-              iconTheme: {
-                primary: "#0d6efd",
-                secondary: "white",
+        <Header user={user} />
+        <main className="d-flex">
+          <Toaster
+            toastOptions={{
+              success: {
+                iconTheme: {
+                  primary: "#0d6efd",
+                  secondary: "white",
+                },
               },
-            },
-            style: {
-              maxWidth: 500,
-            },
-          }}
-        />
-        <Navitem />
-        <section className="p-4 w-100">
-          <Routes>
-            <Route path="/" />
-            {/* <Route path="/signin" element={<SignInPage />} /> */}
-            <Route path="vendors" element={<VendorsPage />} />
-            <Route path="vendors/create" element={<VendorsCreate />} />
-            <Route path="vendor/edit/:id" element={<VendorEditPage />} />
-            <Route path="vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
-            <Route path="/users" element={<UserPage />} />
-            <Route path="users/create" element={<UserCreate />} />
-            {/* <Route path="users/edit/:id" element={<UserEditPage />} /> */}
-          </Routes>
-        </section>
-      </main>
+              style: {
+                maxWidth: 500,
+              },
+            }}
+          />
+          <Navitem />
+          <section className="p-4 w-100">
+            <Routes>
+              <Route path="/" />
+              {/* <Route path="/signin" element={<SignInPage />} /> */}
+              <Route path="vendors" element={<VendorsPage />} />
+              <Route path="vendors/create" element={<VendorsCreate />} />
+              <Route path="vendor/edit/:id" element={<VendorEditPage />} />
+              <Route path="vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
+              <Route path="/users" element={<UserPage />} />
+              <Route path="users/create" element={<UserCreate />} />
+              <Route path="users/edit/:id" element={<UserEditPage />} />
+            </Routes>
+          </section>
+        </main>
       </UserContext.Provider>
     </Router>
   );
