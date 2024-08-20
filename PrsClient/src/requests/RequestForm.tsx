@@ -64,7 +64,24 @@ function RequestForm() {
         />
         <div className="invalid-feedback">{errors?.justification?.message}</div>
       </div>
+<<<<<<< HEAD
       
+=======
+      <div className="mb-3">
+        <label htmlFor="rejectionReason">Rejection reason</label>
+        <input
+          id="RejectionReason"
+          {...register("rejectionReason", {
+            required: "First name is required",
+          })}
+          className={`form-control ${errors.rejectionReason && "is-invalid"} }`}
+          type="text"
+          autoFocus
+        />
+
+        <div className="invalid-feedback">{errors?.rejectionReason?.message}</div>
+      </div>
+>>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
 
       <div className="mb-3">
         <label htmlFor="DeliveryMode">Delivery Mode</label>
@@ -136,7 +153,11 @@ function RequestForm() {
         <button type="submit" className="btn btn-outline-primary">
           Save
         </button>
+<<<<<<< HEAD
         <Link className="btn btn-outline-secondary" to="/requests">
+=======
+        <Link className="btn btn-outline-secondary" to="/vendors">
+>>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
           Cancel
         </Link>
       </div>

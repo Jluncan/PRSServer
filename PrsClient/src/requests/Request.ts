@@ -7,7 +7,11 @@ export class Request {
   rejectionReason = "";
   deliveryMode = "";
   status = "NEW";
+<<<<<<< HEAD
   total: number = 0;
+=======
+  total: number = 3;
+>>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
   userId: User | undefined;
   // requestLines: Requestline[] | undefined;
 
@@ -32,3 +36,8 @@ export class Request {
     // if (initializer.requestLines) this.requestLines = initializer.requestLines;
   }
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49

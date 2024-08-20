@@ -7,6 +7,7 @@ interface RequestCardProps {
 
 function RequestCard({ request, onRemove }: RequestCardProps) {
   return (
+<<<<<<< HEAD
     <table>
   <thead>
     <tr>
@@ -38,4 +39,15 @@ function RequestCard({ request, onRemove }: RequestCardProps) {
   );
 }
  
+=======
+    <>
+      <br />
+      {request.description} <br />
+      {request.justification} <br />
+      {request.status} <br />
+      {request.userId}
+    </>
+  );
+}
+>>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
 export default RequestCard;
