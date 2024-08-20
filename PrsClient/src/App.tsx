@@ -18,6 +18,7 @@ import ProductsPage from "./products/ProductsPage";
 import ProductCreate from "./products/ProductCreate";
 import ProductEditPage from "./products/ProductEditPage";
 import ProductDetailPage from "./products/ProductDetailPage";
+import RequestPage from "./requests/RequestPage";
 
 // import './header'
 
@@ -65,6 +66,8 @@ function App() {
               <Route path="products/create" element={<ProductCreate />} />
               <Route path="product/edit/:id" element={<ProductEditPage />} />
               <Route path="products/detail/:productId/*" element={<ProductDetailPage />} />
+              <Route path="/requests" element={<RequestPage />} />
+              {/* <Route path="requests/create" element={<RequestsCreate />} /> */}
             </Routes>
           </section>
         </main>

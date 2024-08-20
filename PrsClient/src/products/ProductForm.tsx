@@ -81,33 +81,22 @@ function ProductForm() {
           type="text"
           autoFocus
         />
-        
+
         <div className="invalid-feedback">{errors?.price?.message}</div>
       </div>
       <div className="mb-3">
-        <label className="form-label" htmlFor="unit">
-          Unit
-        </label>
-        <select
+        <label htmlFor="unit">Unit</label>
+        <input
           {...register("unit", {
             required: "Unit is required",
           })}
           className={`form-select ${errors.unit && "is-invalid"} `}
           id="unit"
-        >
-          {/* <option value="">Select...</option>
-          <option value="OH">Ohio</option>
-          <option value="KY">Kentucky</option>
-          <option value="IN">Indiana</option>
-          <option value="AR">Arkansas</option>
-          <option value="FL">Florida</option>
-          <option value="GA">Georgia</option>
-          <option value="NY">New york</option> */}
-        </select>
+        ></input>
         <div className="invalid-feedback">{errors?.unit?.message}</div>
       </div>
 
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <label htmlFor="vendorId">VendorId</label>
         <input
           id="vendorId"
@@ -118,6 +107,26 @@ function ProductForm() {
           type="text"
           autoFocus
         />
+        <div className="invalid-feedback">{errors?.vendorId?.message}</div>
+      </div> */}
+      <div className="mb-3">
+        <label className="form-label" htmlFor="vendor">
+          Vendor
+        </label>
+        <select
+          {...register("vendorId", {
+            required: "Actor is required",
+          })}
+          className={`form-select ${errors.vendorId && "is-invalid"} `}
+          id="actor"
+        >
+          <option value="">Select...</option>
+          {vendors.map((vendor) => (
+            <option key={vendor.id} value={vendor.id}>
+              {vendor.name}
+            </option>
+          ))}
+        </select>
         <div className="invalid-feedback">{errors?.vendorId?.message}</div>
       </div>
 
