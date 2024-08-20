@@ -14,6 +14,10 @@ import UserPage from "./users/UserPage";
 import UserEditPage from "./users/UserEditPage";
 import UserCreate from "./users/UserCreate";
 import { UserContext } from "./users/UserContext";
+import ProductsPage from "./products/ProductsPage";
+import ProductCreate from "./products/ProductCreate";
+import ProductEditPage from "./products/ProductEditPage";
+import ProductDetailPage from "./products/ProductDetailPage";
 
 // import './header'
 
@@ -57,6 +61,10 @@ function App() {
               <Route path="/users" element={<UserPage />} />
               <Route path="users/create" element={<UserCreate />} />
               <Route path="users/edit/:id" element={<UserEditPage />} />
+              <Route path="products" element={<ProductsPage />} />
+              <Route path="products/create" element={<ProductCreate />} />
+              <Route path="product/edit/:id" element={<ProductEditPage />} />
+              <Route path="products/detail/:productId/*" element={<ProductDetailPage />} />
             </Routes>
           </section>
         </main>

@@ -12,7 +12,7 @@ function Navitem() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="" className="nav-link">
+          <NavLink to="products" className="nav-link">
             Products
           </NavLink>
         </li>
