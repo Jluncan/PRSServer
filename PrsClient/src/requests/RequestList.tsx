@@ -15,13 +15,9 @@ function RequestList() {
     setBusy(false);
   }
 
-  
   useEffect(() => {
-
     loadRequests();
   }, []);
-
-
 
   async function remove(request: Request) {
     if (confirm("Are you sure you want to delete this Request?")) {
@@ -43,12 +39,32 @@ function RequestList() {
           </div>
         </section>
       )}
-      <div className="d-flex flex-wrap gap-4 list">
-        {requests.map((request: Request) => (
-          <RequestCard key={request.id} request={request} onRemove={remove} />
-        ))}
-      </div>
-      ;
+      <section className="p-5">
+        <section className="border border-1 p-3 bg-body-secondary rounded d-flex flex-wrap">
+          <section className="d-flex flex-wrap gap-5 list">
+            <div className="p-0 m-2">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Desctiption</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Requested by</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {requests.map((request) => (
+                    <RequestCard key={request.id} request={request} onRemove={remove} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </section>
+      <div className="d-flex flex-wrap gap-4 list"></div>
     </>
   );
 }

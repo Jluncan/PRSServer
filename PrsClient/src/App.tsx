@@ -72,6 +72,7 @@ function App() {
               <Route path="requests" element={<RequestPage />} />
               <Route path="requests/create/:id" element={<RequestCreate />} />
               <Route path="requests/edit/:id" element={<RequestEdit />} />
+              <Route path="requests/details/:id" element={<RequestEdit />} />
 
               {/* <Route path="requests/create" element={<RequestsCreate />} /> */}
             </Routes>

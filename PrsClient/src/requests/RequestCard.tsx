@@ -54,7 +54,7 @@ function RequestCard({ request, onRemove }: RequestCardProps) {
               </Link>
             </li>
             <li>
-              <Link to={`/requests/detail/${request.id}`} className="dropdown-item">
+              <Link to={`/requests/details/${request.id}`} className="dropdown-item">
                 Details
               </Link>
             </li>
