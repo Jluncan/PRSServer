@@ -19,10 +19,9 @@ import ProductCreate from "./products/ProductCreate";
 import ProductEditPage from "./products/ProductEditPage";
 import ProductDetailPage from "./products/ProductDetailPage";
 import RequestPage from "./requests/RequestPage";
-<<<<<<< HEAD
+
 import RequestCreate from "./requests/RequestCreate";
-=======
->>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
+import RequestEdit from "./requests/RequestEdit";
 
 // import './header'
 
@@ -70,12 +69,11 @@ function App() {
               <Route path="products/create" element={<ProductCreate />} />
               <Route path="product/edit/:id" element={<ProductEditPage />} />
               <Route path="products/detail/:productId/*" element={<ProductDetailPage />} />
-              <Route path="/requests" element={<RequestPage />} />
-<<<<<<< HEAD
-              <Route path="requests/create" element={<RequestCreate />} />
-=======
+              <Route path="requests" element={<RequestPage />} />
+              <Route path="requests/create/:id" element={<RequestCreate />} />
+              <Route path="requests/edit/:id" element={<RequestEdit />} />
+
               {/* <Route path="requests/create" element={<RequestsCreate />} /> */}
->>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
             </Routes>
           </section>
         </main>

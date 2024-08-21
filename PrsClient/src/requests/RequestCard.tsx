@@ -1,53 +1,78 @@
-import {Request} from "./Request";
+import { SyntheticEvent } from "react";
+import { Dropdown } from "react-bootstrap";
+import { NavLink, Link } from "react-router-dom";
+import { Request } from "./Request";
 
 interface RequestCardProps {
   request: Request;
   onRemove: (request: Request) => void;
 }
-
 function RequestCard({ request, onRemove }: RequestCardProps) {
+  const getBadgeClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "new":
+        return "badge bg-primary";
+      case "review":
+        return "badge bg-warning";
+      case "approved":
+        return "badge bg-success";
+      case "rejected":
+        return "badge bg-danger";
+    }
+  };
+
   return (
-<<<<<<< HEAD
-    <table>
-  <thead>
     <tr>
-      <th>{request.id}</th>
-      <th>{request.description}</th>
-      <th>{request.justification}</th>
+      <td>{request.id}</td>
+      <td>
+        <span>
+          {request.description}
+          <div className="text-secondary">{request.justification}</div>
+        </span>
+      </td>
+      <td>
+        <span className={getBadgeClass(request.status)}>{request.status}</span>
+      </td>
+      <td className="bi-currency-dollar">{request.total}</td>
+      <td>
+        <span>
+          {request.user?.firstname} {request.user?.lastname}
+          <div className="text-secondary">{request.deliveryMode}</div>
+        </span>
+      </td>
+      <td>
+        <Dropdown aria-expanded="false">
+          <Dropdown.Toggle variant="" className="no-caret">
+            <svg className=" m-2 text-primary" width={30} height={20} fill="currentColor">
+              <use xlinkHref="../node_modules/bootstrap-icons/bootstrap-icons.svg#three-dots-vertical" />
+            </svg>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <li>
+              <Link to={`/requests/edit/${request.id}`} className="dropdown-item">
+                Edit
+              </Link>
+            </li>
+            <li>
+              <Link to={`/requests/detail/${request.id}`} className="dropdown-item">
+                Details
+              </Link>
+            </li>
+            <li>
+              <a
+                className="small dropdown-item"
+                onClick={(event: SyntheticEvent) => {
+                  event.preventDefault();
+                  onRemove(request);
+                }}
+              >
+                Delete
+              </a>
+            </li>
+          </Dropdown.Menu>
+        </Dropdown>
+      </td>
     </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{request.status}</td>
-      <td>Maria Anders</td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <td>Centro comercial Moctezuma</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
-    </tr>
-  </tbody>
-</table>
-    // <>
-    //   <br />
-    //   {request.description} <br />
-    //   {request.justification} <br />
-    //   {request.status} <br />
-    //   {request.userId}
-    // </>
   );
 }
- 
-=======
-    <>
-      <br />
-      {request.description} <br />
-      {request.justification} <br />
-      {request.status} <br />
-      {request.userId}
-    </>
-  );
-}
->>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
 export default RequestCard;

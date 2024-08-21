@@ -1,14 +1,16 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { requestAPI } from "./RequestApi";
-import toast from "react-hot-toast";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
+import { User } from "../users/User";
 import { userAPI } from "../users/UserApi";
+import { requestAPI } from "./RequestApi";
 import { Request } from "./Request";
 
-function RequestForm() {
+export function RequestForm() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const requestId = Number(id);
+  const [users, setUser] = useState<User[]>([]);
 
   const {
     register,
@@ -16,6 +18,9 @@ function RequestForm() {
     formState: { errors },
   } = useForm<Request>({
     defaultValues: async () => {
+      let userList = await userAPI.list();
+      setUser(userList);
+
       if (!requestId) {
         return Promise.resolve(new Request());
       } else {
@@ -23,146 +28,118 @@ function RequestForm() {
       }
     },
   });
+
   const save: SubmitHandler<Request> = async (request) => {
     try {
+      let savedRequest;
       if (request.isNew) {
-        await requestAPI.post(request);
+        savedRequest = await requestAPI.post(request);
+        navigate(`/request/detail${savedRequest.id}`);
       } else {
-        await requestAPI.put(request);
+        savedRequest = await requestAPI.put(request);
+        navigate(`/request/detail${requestId}`);
       }
-      toast.success("Successfully saved");
-      navigate("/Requests");
+      console.log(savedRequest);
     } catch (error: any) {
-      toast.error(error.message);
+      console.log(error);
     }
   };
   return (
-    <form className="w-25" onSubmit={handleSubmit(save)}>
-      <div className="mb-3">
-        <label htmlFor="description">Descritpion</label>
-        <input
-          id="description"
-          {...register("description", {
-            required: "username is required",
-          })}
-          className={`form-control ${errors.description && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.description?.message}</div>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="justification">Justification</label>
-        <input
-          id="justification"
-          {...register("justification", {
-            required: "Password is required",
-          })}
-          className={`form-control ${errors.justification && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.justification?.message}</div>
-      </div>
-<<<<<<< HEAD
-      
-=======
-      <div className="mb-3">
-        <label htmlFor="rejectionReason">Rejection reason</label>
-        <input
-          id="RejectionReason"
-          {...register("rejectionReason", {
-            required: "First name is required",
-          })}
-          className={`form-control ${errors.rejectionReason && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
+    <div className="container-fluid">
+      <div>
+        <form className="row g-md-4 needs-validation is-invalid" onSubmit={handleSubmit(save)} noValidate>
+          <div className="col-md-5">
+            <label htmlFor="vc" className="form-label">
+              Request Description
+            </label>
+            <input
+              type="text"
+              id="vc"
+              {...register("description", {
+                required: "Request Description is Required",
+              })}
+              className={`form-control ${errors.description && "is-invalid"} `}
+              placeholder="Enter Request Description"
+            />
+            <div className="invalid-feedback ">{errors?.description?.message}</div>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="justification" className="form-label">
+              Justification
+            </label>
+            <input
+              type="text"
+              id="justification"
+              {...register("justification", { required: "Justification is required" })}
+              placeholder="Enter Justification"
+              className={`form-control ${errors.justification && "is-invalid"}`}
+            />
+            <div className="invalid-feedback">{errors?.justification?.message}</div>
+          </div>
 
-        <div className="invalid-feedback">{errors?.rejectionReason?.message}</div>
-      </div>
->>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
+          <div className="col-3">
+            <label htmlFor="deliveryMode" className="form-label">
+              Delivery Mode
+            </label>
+            <input
+              type="text"
+              id="deliveryMode"
+              {...register("deliveryMode", { required: "Delivery Mode is required" })}
+              placeholder="Enter Delivery Mode"
+              className={`form-control ${errors.deliveryMode && "is-invalid"}`}
+            />
+            <div className="invalid-feedback">{errors?.deliveryMode?.message}</div>
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="status" className="form-label">
+              Status
+            </label>
+            <select
+              id="status"
+              {...register("status", { required: "Status Required" })}
+              defaultValue="NEW"
+              disabled
+              className={`form-select ${errors.status && "is-invalid"}`}
+            >
+              <option value="NEW">NEW</option>
+              <option value="REVIEW">REVIEW</option>
+              <option value="APPROVED">APPROVED</option>
+              <option value="REJECTED">REJECTED</option>
+            </select>
+            <div className="invalid-feedback">{errors?.status?.message}</div>
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="user" className="form-label">
+              Requested By
+            </label>
+            <select
+              id="user"
+              {...register("userId", { required: "Requested by is Required" })}
+              className={`form-select ${errors.userId && "is-invalid"}`}
+            >
+              <option value="">Select...</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.firstName} {user.lastName}
+                </option>
+              ))}
+            </select>
+            <div className="invalid-feedback">{errors?.userId?.message}</div>
+          </div>
 
-      <div className="mb-3">
-        <label htmlFor="DeliveryMode">Delivery Mode</label>
-        <input
-          id="LastName"
-          {...register("deliveryMode", {
-            required: "Delivery Mode is required",
-          })}
-          className={`form-control ${errors.deliveryMode && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.deliveryMode?.message}</div>
+          <div className="offset-7">
+            <NavLink to="/request" className="btn btn-outline-primary me-2 form-check">
+              Cancel
+            </NavLink>
+            <button className="btn btn-primary form-check">
+              <svg className="me-2" width={15} height={23} fill="currentColor">
+                <use xlinkHref="../node_modules/bootstrap-icons/bootstrap-icons.svg#save" />
+              </svg>
+              Save Request
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="mb-3">
-        <label htmlFor="status">Status</label>
-        <input
-          id="Status"
-          {...register("status", {
-            required: "Status is required",
-          })}
-          className={`form-control ${errors.status && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.status?.message}</div>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="Total">Total</label>
-        <input
-          id="total"
-          {...register("total", {
-            required: "Total is required",
-          })}
-          className={`form-control ${errors.total && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.total?.message}</div>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="userId">user Id</label>
-        <input
-          id="userId"
-          {...register("userId", {
-            required: "User Id is required",
-          })}
-          className={`form-control ${errors.userId && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.userId?.message}</div>
-      </div>
-      {/* <div className="mb-3">
-        <label htmlFor="user">User</label>
-        <input
-          id="user"
-          {...register("user", {
-            required: "Delivery Mode is required",
-          })}
-          className={`form-control ${errors.deliveryMode && "is-invalid"} }`}
-          type="text"
-          autoFocus
-        />
-        <div className="invalid-feedback">{errors?.deliveryMode?.message}</div>
-      </div> */}
-
-      <div className="d-flex gap-2">
-        <button type="submit" className="btn btn-outline-primary">
-          Save
-        </button>
-<<<<<<< HEAD
-        <Link className="btn btn-outline-secondary" to="/requests">
-=======
-        <Link className="btn btn-outline-secondary" to="/vendors">
->>>>>>> 373d539ba282f9cbfab6c2ce9797123d8d3b3a49
-          Cancel
-        </Link>
-      </div>
-    </form>
+    </div>
   );
 }
-
-export default RequestForm;
