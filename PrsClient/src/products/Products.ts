@@ -4,7 +4,7 @@ export class Product {
   id: number | undefined;
   partNbr = "";
   name = "";
-  price = "";
+  price = 0;
   // city = "";
   unit = "";
   vendorId = "";

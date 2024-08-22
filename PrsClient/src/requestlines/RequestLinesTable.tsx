@@ -24,7 +24,7 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
             <td>{requestLine.product?.name}</td>
             <td>{requestLine.product?.price}</td>
             <td>{requestLine.quantity}</td>
-            <td></td>
+            <td>${(requestLine.product?.price ?? 0) * (requestLine.quantity ?? 0)}</td>
             <td className="d-flex gap-2">
               <Link to={`/requests/detail/${requestLine.requestId}/requestlines/edit/${requestLine.id}`}>edit</Link>
               <a
