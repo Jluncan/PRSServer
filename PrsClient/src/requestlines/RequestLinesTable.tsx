@@ -7,7 +7,7 @@ interface RequestLinesTableProps {
   onRemove: (requestlines: RequestLines) => void;
 }
 
-function CreditTable({ vendor, onRemove }: RequestLinesTableProps) {
+export function RequestLinesTable({ vendor, onRemove }: RequestLinesTableProps) {
   return (
     <table className="table table-hover table-light w-50">
       <thead>
@@ -21,10 +21,10 @@ function CreditTable({ vendor, onRemove }: RequestLinesTableProps) {
       <tbody>
         {vendor.requestlines?.map((requestlines) => (
           <tr key={requestlines.id}>
-            <td>{requestlines.user?.name}</td>
-            <td>{requestlines.vendor}</td>
+            <td>{requestlines.user?.firstName}</td>
+            <td>{requestlines.quantity}</td>
             <td className="d-flex gap-2">
-              <Link to={`/vendors/detail/${vendor.id}/requestlines/edit/${requestlines.id}`}>edit</Link>
+              <Link to={`/requests/detail/${vendor.id}/requestlines/edit/${requestlines.id}`}>edit</Link>
               <a
                 href="#"
                 onClick={(event) => {
@@ -42,4 +42,4 @@ function CreditTable({ vendor, onRemove }: RequestLinesTableProps) {
   );
 }
 
-export default CreditTable;
+export default RequestLinesTable;

@@ -36,8 +36,8 @@ function RequestCard({ request, onRemove }: RequestCardProps) {
       <td className="bi-currency-dollar">{request.total}</td>
       <td>
         <span>
-          {request.user?.firstname} {request.user?.lastname}
-          <div className="text-secondary">{request.deliveryMode}</div>
+          {request.user?.firstName} {request.user?.lastName}
+          {/* <div className="text-secondary">{request.deliveryMode}</div> */}
         </span>
       </td>
       <td>

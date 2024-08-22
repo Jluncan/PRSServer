@@ -1,3 +1,4 @@
+import { RequestLine } from "../requestlines/RequestLines";
 import { User } from "../users/User";
 
 export class Request {
@@ -9,15 +10,16 @@ export class Request {
   status = "NEW";
   total: number = 0;
 
-  userId: User | undefined;
-  // requestLines: Requestline[] | undefined;
+  userId: number | undefined;
+  requestLines: RequestLine[] | undefined;
+  user: User | undefined;
 
   get isNew(): boolean {
     return this.id === undefined;
   }
 
   get initials(): string {
-    return this.rejectionReason.substring(0, 1); //+ this.lastName.substring(0, 1);
+    return this.rejectionReason.substring(0, 1)
   }
 
   constructor(initializer?: any) {
@@ -30,7 +32,7 @@ export class Request {
     if (initializer.status) this.status = initializer.status;
     if (initializer.total) this.total = initializer.total;
     if (initializer.userId) this.userId = initializer.userId;
-    // if (initializer.requestLines) this.requestLines = initializer.requestLines;
+    if (initializer.requestLines) this.requestLines = initializer.requestLines;
   }
 }
 

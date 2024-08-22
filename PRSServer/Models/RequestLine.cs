@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PRSServer.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace PRSServer.Models {
-    public class RequestLine {
+namespace PrsCSharpServer.Models;
 
-        public int Id { get; set; }
+public class Requestline {
 
-        public int RequestId { get; set; }
-        [JsonIgnore]
-        public virtual Request? Request { get; set; }
-        public int ProductId { get; set; }
-        public virtual Product? Product { get; set; }
+    public int Id { get; set; } = 0;
+    public int Quantity { get; set; } = 1;
 
-        
-        public int Quantity { get; set; } 
-       
-    }
+    public int RequestId { get; set; } = 0;
+    [JsonIgnore]
+    public virtual Request? Request { get; set; } = null;
+
+    public int ProductId { get; set; } = 0;
+    public virtual Product? Product { get; set; } = null;
+
 }

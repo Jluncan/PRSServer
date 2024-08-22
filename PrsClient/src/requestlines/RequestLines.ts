@@ -1,10 +1,13 @@
+import { Product } from "../products/Products";
 import { User } from "../users/User";
+import { Vendor } from "../vendors/Vendor";
 
-export class RequestLines {
-  id: number | undefined;
-  vendorId: number | undefined;
-  userId: number | undefined;
-  vendor = "";
+export class RequestLine {
+  id: number | undefined = undefined;
+  requestId: number | undefined;
+  productId: number | undefined;
+  quantity: number | undefined;
+  product: Product | undefined;
   user: User | undefined;
 
   get isNew(): boolean {
@@ -13,10 +16,12 @@ export class RequestLines {
 
   constructor(initializer?: any) {
     if (!initializer) return;
+
     if (initializer.id) this.id = initializer.id;
-    if (initializer.vendorId) this.vendorId = initializer.vendorId;
-    if (initializer.userId) this.userId = initializer.userId;
-    if (initializer.vendor) this.vendor = initializer.vendor;
+    if (initializer.requestId) this.requestId = initializer.requestId;
+    if (initializer.productId) this.productId = initializer.productId;
+    if (initializer.quantity) this.quantity = initializer.quantity;
+    if (initializer.product) this.product = initializer.product;
     if (initializer.user) this.user = initializer.user;
   }
 }

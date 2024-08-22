@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { requestAPI } from "./RequestApi";
 import { Request } from "./Request";
+import RequestLinesTable from "../requestlines/RequestLinesTable";
+import RequestLinesForm from "../requestlines/RequestLinesForm";
 
 function RequestDetails() {
-//  const [request, setRequest] =useState<Request>()
   const { id } = useParams<{ id: string }>();
   const requestId = Number(id);
   const [request, setRequest] = useState<Request | undefined>(undefined);
@@ -20,7 +21,7 @@ function RequestDetails() {
   const getBadgeClass = (status: string | undefined) => {
     switch (status?.toLowerCase()) {
       case "new":
-        return "badge bg-primary"; 
+        return "badge bg-primary";
       case "review":
         return "badge bg-warning";
       case "approved":
@@ -34,7 +35,7 @@ function RequestDetails() {
   return (
     <>
       <div className="px-4 pb-0 mb-0 mt-3 d-flex justify-content-between">
-        <h2>Request</h2>
+        <h2>Request Details</h2>
         <button className="btn btn-primary">Send For Review</button>
       </div>
       <hr className="mt-2" />
@@ -59,12 +60,14 @@ function RequestDetails() {
           <dl>
             <dt>Requested By</dt>
             <dd>
-              {request?.user?.firstname} {request?.user?.lastname}
+              {request?.user?.firstName} {request?.user?.lastName}
             </dd>
           </dl>
         </div>
       </div>
       <div></div>
+      {/* <RequestLinesTable/> */}
     </>
   );
 }
+export default RequestDetails;

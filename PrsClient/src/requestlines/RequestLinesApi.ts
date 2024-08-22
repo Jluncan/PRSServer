@@ -1,32 +1,32 @@
 import { BASE_URL, delay, checkStatus, parseJSON } from "../utility/fetchUtilities";
-import {  RequestLines } from "./RequestLines";
-import { productId } from "./Products";
+import { RequestLine } from "./RequestLines";
+// import { productId } from "./Products";
 
-let url = `${BASE_URL}/credits`;
+let url = `${BASE_URL}/requestline`;
 
 function replacer(key: string, value: any) {
-  if (key === "actor") return undefined;
+  if (key === "product") return undefined;
   return value;
 }
 
-export const creditAPI = {
-  list(): Promise<RequestLines[]> {
-    return fetch(url).then(delay(400)).then(checkStatus).then(parseJSON);
+export const requestlinesAPI = {
+  list(): Promise<RequestLine[]> {
+    return fetch(url).then(delay(200)).then(checkStatus).then(parseJSON);
   },
 
-  listByMovie(vendorId: number): Promise<RequestLines[]> {
+  listByMovie(vendorId: number): Promise<RequestLine[]> {
     let currentUrl = `${BASE_URL}/vendor/${vendorId}/requestlines?_expand=user`;
     return fetch(currentUrl).then(checkStatus).then(parseJSON);
   },
 
-  find(id: number): Promise<RequestLines> {
+  find(id: number): Promise<RequestLine> {
     return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
   },
 
-  post(requestlines: RequestLines) {
+  post(requestlines: RequestLine) {
     return fetch(`${url}`, {
       method: "POST",
-      body: JSON.stringify(RequestLines, replacer),
+      body: JSON.stringify(requestlines, replacer),
       headers: {
         "Content-Type": "application/json",
       },
@@ -35,7 +35,7 @@ export const creditAPI = {
       .then(parseJSON);
   },
 
-  put(requestline: RequestLines) {
+  put(requestline: RequestLine) {
     return fetch(`${url}/${requestline.id}`, {
       method: "PUT",
       body: JSON.stringify(requestline, replacer),
@@ -43,7 +43,6 @@ export const creditAPI = {
         "Content-Type": "application/json",
       },
     }).then(checkStatus);
-    // .then(parseJSON);
   },
 
   delete(id: number) {

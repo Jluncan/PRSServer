@@ -22,6 +22,10 @@ import RequestPage from "./requests/RequestPage";
 
 import RequestCreate from "./requests/RequestCreate";
 import RequestEdit from "./requests/RequestEdit";
+import SignInPage from "./signin/SignInPage";
+import RequestLinesCreatePage from "./requestlines/RequestLinesCreatePage";
+import RequestLinesEditPage from "./requestlines/RequestLinesEditPage";
+import RequestDetail from "./requests/RequestDetail";
 
 // import './header'
 
@@ -38,7 +42,7 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
-        <Header user={user} />
+        <Header />
         <main className="d-flex">
           <Toaster
             toastOptions={{
@@ -72,7 +76,10 @@ function App() {
               <Route path="requests" element={<RequestPage />} />
               <Route path="requests/create/:id" element={<RequestCreate />} />
               <Route path="requests/edit/:id" element={<RequestEdit />} />
-              <Route path="requests/details/:id" element={<RequestEdit />} />
+              <Route path="requests/details/:id" element={<RequestDetail />} />
+              <Route path="signinpage" element={<SignInPage />} />
+              <Route path="/requests/detail/:requestId/requestlines/create" element={<RequestLinesCreatePage />} />
+              <Route path="requests/detail/:requestId/requeslines/edit/:requestId" element={<RequestLinesEditPage />} />
 
               {/* <Route path="requests/create" element={<RequestsCreate />} /> */}
             </Routes>
