@@ -4,11 +4,14 @@ import { requestAPI } from "./RequestApi";
 import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
 import RequestLinesForm from "../requestlines/RequestLinesForm";
+import { RequestLine } from "../requestlines/RequestLines";
 
 function RequestDetails() {
   const { id } = useParams<{ id: string }>();
   const requestId = Number(id);
   const [request, setRequest] = useState<Request | undefined>(undefined);
+
+  function remove(requestLine: RequestLine) {}
 
   useEffect(() => {
     getId();
@@ -66,7 +69,7 @@ function RequestDetails() {
         </div>
       </div>
       <div></div>
-      {/* <RequestLinesTable/> */}
+      <RequestLinesTable requestLines={request.requestLines} onRemove={remove} />
     </>
   );
 }

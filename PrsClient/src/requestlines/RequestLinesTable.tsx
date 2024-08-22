@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Vendor } from "../vendors/Vendor";
-import { RequestLines } from "./RequestLines";
-
+import { RequestLine } from "./RequestLines";
 interface RequestLinesTableProps {
-  vendor: Vendor;
-  onRemove: (requestlines: RequestLines) => void;
+  requestLines: RequestLine[] | undefined;
+  onRemove: (requestlines: RequestLine) => void;
 }
 
-export function RequestLinesTable({ vendor, onRemove }: RequestLinesTableProps) {
+function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
   return (
     <table className="table table-hover table-light w-50">
       <thead>
@@ -19,17 +18,17 @@ export function RequestLinesTable({ vendor, onRemove }: RequestLinesTableProps) 
         </tr>
       </thead>
       <tbody>
-        {vendor.requestlines?.map((requestlines) => (
-          <tr key={requestlines.id}>
-            <td>{requestlines.user?.firstName}</td>
-            <td>{requestlines.quantity}</td>
+        {requestLines?.map((requestLine) => (
+          <tr key={requestLine.id}>
+            <td>{requestLine.user?.firstName}</td>
+            <td>{requestLine.quantity}</td>
             <td className="d-flex gap-2">
-              <Link to={`/requests/detail/${vendor.id}/requestlines/edit/${requestlines.id}`}>edit</Link>
+              <Link to={`/requests/detail/${requestLine.requestId}/requestlines/edit/${requestLine.id}`}>edit</Link>
               <a
                 href="#"
                 onClick={(event) => {
                   event.preventDefault();
-                  onRemove(requestlines);
+                  onRemove(requestLine);
                 }}
               >
                 delete

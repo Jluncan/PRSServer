@@ -74,7 +74,7 @@ function App() {
               <Route path="product/edit/:id" element={<ProductEditPage />} />
               <Route path="products/detail/:productId/*" element={<ProductDetailPage />} />
               <Route path="requests" element={<RequestPage />} />
-              <Route path="requests/create/:id" element={<RequestCreate />} />
+              <Route path="requests/create" element={<RequestCreate />} />
               <Route path="requests/edit/:id" element={<RequestEdit />} />
               <Route path="requests/details/:id" element={<RequestDetail />} />
               <Route path="signinpage" element={<SignInPage />} />

@@ -34,10 +34,10 @@ export function RequestForm() {
       let savedRequest;
       if (request.isNew) {
         savedRequest = await requestAPI.post(request);
-        navigate(`/request/detail${savedRequest.id}`);
+        navigate(`/requests/details/${savedRequest.id}`);
       } else {
         savedRequest = await requestAPI.put(request);
-        navigate(`/request/detail${requestId}`);
+        navigate(`/requests/details/${requestId}`);
       }
       console.log(savedRequest);
     } catch (error: any) {
@@ -128,7 +128,7 @@ export function RequestForm() {
           </div>
 
           <div className="offset-7">
-            <NavLink to="/request" className="btn btn-outline-primary me-2 form-check">
+            <NavLink to="/requests" className="btn btn-outline-primary me-2 form-check">
               Cancel
             </NavLink>
             <button className="btn btn-primary form-check">

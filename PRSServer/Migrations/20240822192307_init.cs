@@ -41,7 +41,7 @@ namespace PRSServer.Migrations
                     Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    Zip = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
@@ -58,7 +58,7 @@ namespace PRSServer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     Justification = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    RejectionReason = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    RejectionReason = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
                     DeliveryMode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Total = table.Column<decimal>(type: "decimal(11,2)", nullable: false),
@@ -85,7 +85,7 @@ namespace PRSServer.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     unit = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    PhotoPath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    PhotoPath = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     VendorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

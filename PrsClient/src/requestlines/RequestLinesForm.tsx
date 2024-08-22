@@ -15,7 +15,7 @@ import { requestlinesAPI } from "./RequestLinesApi";
 
 function RequestLinesForm() {
   const navigate = useNavigate();
-  //   let { requestId: requestLinesIdAsString } = useParams<{ requestLinesId: string }>();
+    // let { requestId: requestLinesIdAsString } = useParams<{ requestLinesId: string }>();
   let { id: requestIdAsString, lineId: lineIdAsString } = useParams<{ id: string, lineId:string }>();
   let requestLineId = Number(lineIdAsString);
   let requestId = Number(requestIdAsString);
@@ -48,7 +48,7 @@ function RequestLinesForm() {
       } else {
         await requestlinesAPI.put(requestlines);
       }
-      //   navigate(`/request/detail/${requestId}?lastUpdated=${Date.now()}`);
+     
       navigate(`/request/detail/${requestId}`)
     } catch (error: any) {
       toast.error(error.message);

@@ -273,7 +273,7 @@ namespace PRSServer.Migrations
                         .IsRequired();
 
                     b.HasOne("PRSServer.Models.Request", "Request")
-                        .WithMany()
+                        .WithMany("Requestlines")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,6 +281,11 @@ namespace PRSServer.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("PRSServer.Models.Request", b =>
+                {
+                    b.Navigation("Requestlines");
                 });
 #pragma warning restore 612, 618
         }

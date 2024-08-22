@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PRSServer.Migrations
 {
     [DbContext(typeof(PrsDbContext))]
-    [Migration("20240710142345_removed status and totalAmount")]
-    partial class removedstatusandtotalAmount
+    [Migration("20240822192307_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -276,7 +276,7 @@ namespace PRSServer.Migrations
                         .IsRequired();
 
                     b.HasOne("PRSServer.Models.Request", "Request")
-                        .WithMany()
+                        .WithMany("Requestlines")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -284,6 +284,11 @@ namespace PRSServer.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("PRSServer.Models.Request", b =>
+                {
+                    b.Navigation("Requestlines");
                 });
 #pragma warning restore 612, 618
         }
