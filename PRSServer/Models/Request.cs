@@ -23,7 +23,7 @@ namespace PRSServer.Models {
 
         public int UserId { get; set; }
         public virtual User? User { get; set; }
-        public virtual ICollection<RequestLine>? Requestlines { get; set; } = default!;
+        public virtual ICollection<RequestLine>? RequestLines { get; set; } = default!;
 
     }
 }
