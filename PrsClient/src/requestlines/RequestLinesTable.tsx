@@ -15,13 +15,16 @@ function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
           <th>Price</th>
           <th>Quantity</th>
           <th>Amount</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {requestLines?.map((requestLine) => (
           <tr key={requestLine.id}>
-            <td>{requestLine.user?.firstName}</td>
+            <td>{requestLine.product?.name}</td>
+            <td>{requestLine.product?.price}</td>
             <td>{requestLine.quantity}</td>
+            <td></td>
             <td className="d-flex gap-2">
               <Link to={`/requests/detail/${requestLine.requestId}/requestlines/edit/${requestLine.id}`}>edit</Link>
               <a
