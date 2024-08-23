@@ -7,17 +7,14 @@ import { Product } from "../products/Products";
 import { RequestLine } from "./RequestLines";
 import { requestlinesAPI } from "./RequestLinesApi";
 
-
-
-
-
-
-
 function RequestLinesForm() {
   const navigate = useNavigate();
-    // let { requestId: requestLinesIdAsString } = useParams<{ requestLinesId: string }>();
-  let { id: requestIdAsString, lineId: lineIdAsString } = useParams<{ id: string, lineId:string }>();
-  let requestLineId = Number(lineIdAsString);
+  // let { requestId: requestLinesIdAsString } = useParams<{ requestLinesId: string }>();
+  let { requestId: requestIdAsString, requestlineId: requestlineIdAsString } = useParams<{
+    requestId: string;
+    requestlineId: string;
+  }>();
+  let requestLineId = Number(requestlineIdAsString);
   let requestId = Number(requestIdAsString);
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -30,26 +27,24 @@ function RequestLinesForm() {
       let productsData = await productAPI.list();
       setProducts(productsData);
 
-        if (!requestLineId) {
-      let requestlines = new RequestLine({ requestId: requestId });
-      return Promise.resolve(requestlines);
-       }
-      else {
-         return await requestlinesAPI.find(requestLineId);
-          
-        }
+      if (!requestLineId) {
+        let newrequestlines = new RequestLine({ requestId: requestId });
+        return Promise.resolve(newrequestlines);
+      } else {
+        return await requestlinesAPI.find(requestLineId);
+      }
     },
   });
 
-  const save: SubmitHandler<RequestLine> = async (requestlines: RequestLine) => {
+  const save: SubmitHandler<RequestLine> = async (requestline: RequestLine) => {
     try {
-      if (requestlines.isNew) {
-        await requestlinesAPI.post(requestlines);
+      if (requestline.isNew) {
+        let newRequestLine = await requestlinesAPI.post(requestline);
+        navigate(`/requests/details/${newRequestLine.requestId}`);
       } else {
-        await requestlinesAPI.put(requestlines);
+        await requestlinesAPI.put(requestline);
+        navigate(`/requests/details/${requestId}`);
       }
-     
-      navigate(`/request/detail/${requestId}`)
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -66,7 +61,8 @@ function RequestLinesForm() {
             required: "Product Name is required",
           })}
           className={`form-select ${errors.productId && "is-invalid"} `}
-          id="product">
+          id="product"
+        >
           <option value="">Select...</option>
           {products.map((product) => (
             <option key={product.id} value={product.id}>
@@ -89,12 +85,12 @@ function RequestLinesForm() {
           type="text"
           id="quantity"
         />
-      <div className="invalid-feedback">{errors?.quantity?.message}</div>
+        <div className="invalid-feedback">{errors?.quantity?.message}</div>
       </div>
 
       <div className="d-flex gap-2">
         <button className="btn btn-outline-primary">Save</button>
-        <Link className="btn btn-outline-secondary" to={`/request/detail/${requestId}`}>
+        <Link className="btn btn-outline-secondary" to={`/requests/details/${requestId}`}>
           Cancel
         </Link>
       </div>

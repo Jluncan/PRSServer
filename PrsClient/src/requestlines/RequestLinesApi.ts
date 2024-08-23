@@ -2,7 +2,7 @@ import { BASE_URL, delay, checkStatus, parseJSON } from "../utility/fetchUtiliti
 import { RequestLine } from "./RequestLines";
 // import { productId } from "./Products";
 
-let url = `${BASE_URL}/requestline`;
+let url = `${BASE_URL}/requestlines`;
 
 function replacer(key: string, value: any) {
   if (key === "product") return undefined;
@@ -14,10 +14,10 @@ export const requestlinesAPI = {
     return fetch(url).then(delay(200)).then(checkStatus).then(parseJSON);
   },
 
-  listByMovie(vendorId: number): Promise<RequestLine[]> {
-    let currentUrl = `${BASE_URL}/vendor/${vendorId}/requestlines?_expand=user`;
-    return fetch(currentUrl).then(checkStatus).then(parseJSON);
-  },
+  // listByMovie(vendorId: number): Promise<RequestLine[]> {
+  //   let currentUrl = `${BASE_URL}/vendor/${vendorId}/requestlines?_expand=user`;
+  //   return fetch(currentUrl).then(checkStatus).then(parseJSON);
+  // },
 
   find(id: number): Promise<RequestLine> {
     return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
