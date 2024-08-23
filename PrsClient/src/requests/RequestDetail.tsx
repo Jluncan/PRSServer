@@ -14,7 +14,7 @@ function RequestDetails() {
   const [request, setRequest] = useState<Request | undefined>(undefined);
 
   async function remove(requestLine: RequestLine) {
-    if (confirm("Are you sure you want to delete this Movie?")) {
+    if (confirm("Are you sure you want to delete this Requestline?")) {
       if (requestLine.id) {
         await requestlinesAPI.delete(requestLine.id);
         toast.success("Successfully deleted.");
