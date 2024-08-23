@@ -1,9 +1,9 @@
-import React from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { User } from './User';
-import { userAPI } from './UserApi';
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { User } from "./User";
+import { userAPI } from "./UserApi";
 
 function UserForm() {
   const navigate = useNavigate();
@@ -42,14 +42,14 @@ function UserForm() {
         <label htmlFor="UserName">UserName</label>
         <input
           id="username"
-          {...register("username", {
+          {...register("userName", {
             required: "username is required",
           })}
-          className={`form-control ${errors.username && "is-invalid"} }`}
+          className={`form-control ${errors.userName && "is-invalid"} }`}
           type="text"
           autoFocus
         />
-        <div className="invalid-feedback">{errors?.username?.message}</div>
+        <div className="invalid-feedback">{errors?.userName?.message}</div>
       </div>
       <div className="mb-3">
         <label htmlFor="Password">Password</label>
@@ -59,8 +59,7 @@ function UserForm() {
             required: "Password is required",
           })}
           className={`form-control ${errors.password && "is-invalid"} }`}
-          type="text"
-          autoFocus
+          type="password"
         />
         <div className="invalid-feedback">{errors?.password?.message}</div>
       </div>
@@ -73,9 +72,8 @@ function UserForm() {
           })}
           className={`form-control ${errors.firstName && "is-invalid"} }`}
           type="text"
-          autoFocus
         />
-        
+
         <div className="invalid-feedback">{errors?.firstName?.message}</div>
       </div>
 
@@ -88,7 +86,6 @@ function UserForm() {
           })}
           className={`form-control ${errors.lastName && "is-invalid"} }`}
           type="text"
-          autoFocus
         />
         <div className="invalid-feedback">{errors?.lastName?.message}</div>
       </div>
@@ -105,8 +102,4 @@ function UserForm() {
   );
 }
 
-      
-      
-
-
-export default UserForm
+export default UserForm;

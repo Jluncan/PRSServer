@@ -25,6 +25,7 @@ function UserCard({ user, onRemove }: UserCardProps) {
         <div className="d-flex justify-content-between align-items-center">
           <span>
             <strong>
+
               {user.firstName}
               {user.lastName}
             </strong>{" "}
@@ -58,7 +59,7 @@ function UserCard({ user, onRemove }: UserCardProps) {
           </Dropdown>
         </div>
         <br />
-        {user.username} <br />
+        {user.userName} <br />
         {user.password} <br />
         {user.firstName} <br />
         {user.lastName}
