@@ -1,46 +1,51 @@
 import { Link } from "react-router-dom";
-import { Vendor } from "../vendors/Vendor";
+import { Request } from "../requests/Request";
 import { RequestLine } from "./RequestLines";
 interface RequestLinesTableProps {
-  requestLines: RequestLine[] | undefined;
+  request: Request | undefined;
   onRemove: (requestlines: RequestLine) => void;
 }
 
-function RequestLinesTable({ requestLines, onRemove }: RequestLinesTableProps) {
+function RequestLinesTable({ request, onRemove }: RequestLinesTableProps) {
   return (
-    <table className="table table-hover table-light w-50">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Amount</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {requestLines?.map((requestLine) => (
-          <tr key={requestLine.id}>
-            <td>{requestLine.product?.name}</td>
-            <td>{requestLine.product?.price}</td>
-            <td>{requestLine.quantity}</td>
-            <td>${(requestLine.product?.price ?? 0) * (requestLine.quantity ?? 0)}</td>
-            <td className="d-flex gap-2">
-              <Link to={`/requests/detail/${requestLine.requestId}/requestlines/edit/${requestLine.id}`}>edit</Link>
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  onRemove(requestLine);
-                }}
-              >
-                delete
-              </a>
-            </td>
+    <>
+      <Link className="btn btn-primary" to={`/requests/detail/${request?.id}/requestlines/create`}>
+        + Create Request Line
+      </Link>
+      <table className="table table-hover table-light w-50">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {request?.requestLines?.map((requestLine) => (
+            <tr key={requestLine.id}>
+              <td>{requestLine.product?.name}</td>
+              <td>{requestLine.product?.price}</td>
+              <td>{requestLine.quantity}</td>
+              <td>${(requestLine.product?.price ?? 0) * (requestLine.quantity ?? 0)}</td>
+              <td className="d-flex gap-2">
+                <Link to={`/requests/detail/${requestLine.requestId}/requestlines/edit/${requestLine.id}`}>edit</Link>
+                <a
+                  href="#"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onRemove(requestLine);
+                  }}
+                >
+                  delete
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 
