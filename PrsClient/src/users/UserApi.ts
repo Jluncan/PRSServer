@@ -5,7 +5,7 @@ let url = `${BASE_URL}/users`;
 
 export const userAPI = {
   findByAccount(username: string, password: string): Promise<User[]> {
-    return fetch(`${url}?username=${username}&password=${password}`).then(checkStatus).then(parseJSON);
+    return fetch(`${url}/${username}/${password}`).then(checkStatus).then(parseJSON);
   },
   list(): Promise<User[]> {
     return fetch(`${url}`).then(delay(600)).then(checkStatus).then(parseJSON);

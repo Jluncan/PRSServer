@@ -5,14 +5,26 @@ import { Request } from "./Request";
 import RequestLinesTable from "../requestlines/RequestLinesTable";
 import RequestLinesForm from "../requestlines/RequestLinesForm";
 import { RequestLine } from "../requestlines/RequestLines";
+import { requestlinesAPI } from "../requestlines/RequestLinesApi";
+import toast from "react-hot-toast";
 
 function RequestDetails() {
   const { id } = useParams<{ id: string }>();
   const requestId = Number(id);
   const [request, setRequest] = useState<Request | undefined>(undefined);
 
-  function remove(requestLine: RequestLine) {}
-
+  async function remove(requestLine: RequestLine) {
+    if (confirm("Are you sure you want to delete this Movie?")) {
+      if (requestLine.id) {
+        await requestlinesAPI.delete(requestLine.id);
+        toast.success("Successfully deleted.");
+        let updatedCredits = request?.requestLines?.filter((c) => c.id !== requestLine.id);
+        if (request) {
+          setRequest({ ...request, requestLines: updatedCredits } as Request);
+        }
+      }
+    }
+  }
   useEffect(() => {
     getId();
   }, []);
@@ -73,4 +85,5 @@ function RequestDetails() {
     </>
   );
 }
+
 export default RequestDetails;
