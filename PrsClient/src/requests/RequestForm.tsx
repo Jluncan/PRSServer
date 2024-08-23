@@ -5,12 +5,14 @@ import { User } from "../users/User";
 import { userAPI } from "../users/UserApi";
 import { requestAPI } from "./RequestApi";
 import { Request } from "./Request";
+import { useUserContext } from "../users/UserContext";
 
 export function RequestForm() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const requestId = Number(id);
-  const [users, setUser] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const { user } = useUserContext();
 
   const {
     register,
@@ -19,10 +21,10 @@ export function RequestForm() {
   } = useForm<Request>({
     defaultValues: async () => {
       let userList = await userAPI.list();
-      setUser(userList);
+      setUsers(userList);
 
       if (!requestId) {
-        return Promise.resolve(new Request());
+        return Promise.resolve(new Request({ userId: user?.id }));
       } else {
         return await requestAPI.find(requestId);
       }

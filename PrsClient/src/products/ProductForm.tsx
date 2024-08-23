@@ -37,7 +37,7 @@ function ProductForm() {
         await productAPI.put(product);
       }
       toast.success("Successfully saved");
-      navigate("`/users/User/${userId}?lastUpdated=${Date.now()}`");
+      navigate("/products");
     } catch (error: any) {
       toast.error(error.message);
     }

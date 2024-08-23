@@ -26,7 +26,7 @@ function RequestLinesTable({ request, onRemove }: RequestLinesTableProps) {
           {request?.requestLines?.map((requestLine) => (
             <tr key={requestLine.id}>
               <td>{requestLine.product?.name}</td>
-              <td>{requestLine.product?.price}</td>
+              <td>${requestLine.product?.price}</td>
               <td>{requestLine.quantity}</td>
               <td>${(requestLine.product?.price ?? 0) * (requestLine.quantity ?? 0)}</td>
               <td className="d-flex gap-2">
@@ -44,6 +44,15 @@ function RequestLinesTable({ request, onRemove }: RequestLinesTableProps) {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>${request?.total}</td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
     </>
   );
